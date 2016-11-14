@@ -33,7 +33,7 @@ int generiere_zufallszahl_bis_anzahl_der_Lieder(int anzahl_der_Lieder){
 class Lied
 {
 	private:
-	// Lied* pointer; // ?? Pointeraddresse fÃ¼r das Lied
+	// Lied* pointer; // ?? Pointeraddresse für das Lied
 
 	public:
 	int index_Name;
@@ -52,7 +52,7 @@ class Playlist
 {
 	private:
 	int index_Anzahl;
-	vector<Lied*> playlist; //Zeiger fÃ¼r Lied
+	vector<Lied*> playlist; //Zeiger für Lied
 	vector<int> wichtung;
 	vector<int> reihenfolge;
 
@@ -110,10 +110,10 @@ class Playlist
 	};
 
 	void next(vector<double> rank){
-		for(int i=0; i<sizeof(playlist);i++)
+		for(int i=0; i<sizeof(playlist)-1;i++)
 		{
 			//Anhand von einer Zufallszahl und der Wichtung wird errechnet, ob ein Lied uebersprungen wird
-			if((rank[i]*generiere_zufallszahl_bis_anzahl_der_Lieder(sizeof(playlist)))<=0.5)
+			if((rank[i]*generiere_zufallszahl_bis_anzahl_der_Lieder(sizeof(playlist)-1))<=0.5)
 			{
 				wichtung[i]++;
 			}
@@ -143,7 +143,7 @@ class Playlist
 */
 };
 
-
+//%Fehler% "warning: Heap block at 008C14F8 modified at 008C1550 past requested size of 50"
 class Musikspieler
 {
 	private:
@@ -157,7 +157,7 @@ class Musikspieler
 	Musikspieler()
 	{
 		like_Rank.reserve(10);
-		for(int i=0;i<sizeof(like_Rank);i++)
+		for(int i=0;i<sizeof(like_Rank)-1;i++)
 		{
 			like_Rank[i]=0;
 		}
@@ -179,8 +179,10 @@ class Musikspieler
 
 		void get_Like_Rank(vector<double> Rank)
 		{
-			for(int i=0;i<sizeof(playlist);i++)
+			for(int i=0;i<sizeof(playlist)-1;i++)
 			{
+				//%Fehler% "Quit (expect signal SIGINT when the program is resumed)"
+
 				like_Rank[i]=Rank[i];
 			}
 		}
@@ -205,7 +207,6 @@ class Benutzer
 	Benutzer()
 	{
 		anzahl_der_Lieder=10; //skalierung
-		Musikspieler M;
 
 		ifstream Benutzer_text;
 		Benutzer_text.open("Ergebnisse_Benutzer.txt",ios_base::in | ios_base::out | ios_base::trunc);
@@ -215,7 +216,7 @@ class Benutzer
 		}
 
 		like_Rank.reserve(anzahl_der_Lieder);
-				for(int i=0;i<sizeof(like_Rank);i++)
+				for(int i=0;i<sizeof(like_Rank)-1;i++)
 				{
 					like_Rank[i]=1;
 				};
@@ -256,7 +257,7 @@ public:
 					cerr<<"Fehler beim oeffnen von Rang_Ergebnisse_Benutzer";
 				}
 				like_Rank.reserve(anzahl_der_Lieder);
-								for(int i=0;i<sizeof(like_Rank);i++)
+								for(int i=0;i<sizeof(like_Rank)-1;i++)
 								{
 									like_Rank[i]=0;
 								};
@@ -264,7 +265,7 @@ public:
 
 	void rang_bestimmen()
 	{
-		// erstelle like_Rank fÃ¼r die praeferierung der Lieder fÃ¼r den Benutzer
+		// erstelle like_Rank für die praeferierung der Lieder für den Benutzer
 						int  zufallszahl=-1;;
 						for(double i=1/anzahl_der_Lieder;i<=anzahl_der_Lieder;i+=1/anzahl_der_Lieder)
 						{
@@ -298,7 +299,7 @@ public:
 						cerr<<"Fehler beim oeffnen von Rang_Ergebnisse_Benutzer";
 					}
 					like_Rank.reserve(anzahl_der_Lieder);
-									for(int i=0;i<sizeof(like_Rank);i++)
+									for(int i=0;i<sizeof(like_Rank)-1;i++)
 									{
 										like_Rank[i]=0;
 									};
@@ -330,7 +331,7 @@ public:
 			}
 
 			like_Rank.reserve(anzahl_der_Lieder);
-							for(int i=0;i<sizeof(like_Rank);i++)
+							for(int i=0;i<sizeof(like_Rank)-1;i++)
 							{
 								like_Rank[i]=0;
 							};
@@ -339,7 +340,7 @@ public:
 
 	void rang_bestimmen()
 	{
-		for(int i=0;i<sizeof(like_Rank);i++)
+		for(int i=0;i<sizeof(like_Rank)-1;i++)
 		{
 			like_Rank[i]=0.1;
 		};
@@ -358,7 +359,7 @@ int main(){
 
 
 	//%Fehler% Benutzer b1 kann nicht erstellt werden, weil der Linker nicht darauf zeigen kann
-	Benutzer b1=0;
+	Benutzer b1;
 	b1.start();
 	//--------
 	Rang_Benutzer b2;
