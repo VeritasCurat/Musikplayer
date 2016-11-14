@@ -206,7 +206,7 @@ class Benutzer
 
 	Benutzer()
 	{
-		anzahl_der_Lieder=10; //skalierung
+		anzahl_der_Lieder=10; //Skalierung
 
 		ifstream Benutzer_text;
 		Benutzer_text.open("Ergebnisse_Benutzer.txt",ios_base::in | ios_base::out | ios_base::trunc);
