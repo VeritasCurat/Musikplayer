@@ -33,7 +33,7 @@ int generiere_zufallszahl_bis_anzahl_der_Lieder(int anzahl_der_Lieder){
 class Lied
 {
 	private:
-	// Lied* pointer; // ?? Pointeraddresse für das Lied
+	// Lied* pointer; // ?? Pointeraddresse fuer das Lied
 
 	public:
 	int index_Name;
@@ -52,7 +52,7 @@ class Playlist
 {
 	private:
 	int index_Anzahl;
-	vector<Lied*> playlist; //Zeiger für Lied
+	vector<Lied*> playlist; //Zeiger fuer Lied
 	vector<int> wichtung;
 	vector<int> reihenfolge;
 
@@ -143,7 +143,7 @@ class Playlist
 */
 };
 
-//%Fehler% "warning: Heap block at 008C14F8 modified at 008C1550 past requested size of 50"
+
 class Musikspieler
 {
 	private:
@@ -265,7 +265,7 @@ public:
 
 	void rang_bestimmen()
 	{
-		// erstelle like_Rank für die praeferierung der Lieder für den Benutzer
+		// erstelle like_Rank fuer die praeferierung der Lieder fuer den Benutzer
 						int  zufallszahl=-1;;
 						for(double i=1/anzahl_der_Lieder;i<=anzahl_der_Lieder;i+=1/anzahl_der_Lieder)
 						{
@@ -358,7 +358,7 @@ int main(){
 
 
 
-	//%Fehler% Benutzer b1 kann nicht erstellt werden, weil der Linker nicht darauf zeigen kann
+
 	Benutzer b1;
 	b1.start();
 	//--------
