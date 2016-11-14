@@ -7,13 +7,14 @@
 
 #include <vector>
 #include <iostream>
-#include <array>
 #include <stdlib.h>
 #include <time.h>
 #include <fstream>
+#include <array>
 
 using namespace std;
 
+int index=10;
 
 
 double generiere_zufallszahl(){
@@ -109,11 +110,11 @@ class Playlist
 
 	};
 
-	void next(vector<double> rank){
-		for(int i=0; i<sizeof(playlist)-1;i++)
+	void next(double rank[]){
+		for(int i=0; i<index;i++)
 		{
 			//Anhand von einer Zufallszahl und der Wichtung wird errechnet, ob ein Lied uebersprungen wird
-			if((rank[i]*generiere_zufallszahl_bis_anzahl_der_Lieder(sizeof(playlist)-1))<=0.5)
+			if((rank[i]*generiere_zufallszahl_bis_anzahl_der_Lieder(index))<=0.5)
 			{
 				wichtung[i]++;
 			}
@@ -149,18 +150,17 @@ class Musikspieler
 	private:
 
 	Playlist playlist;
-	vector<double> like_Rank;
+	array<double,10> like_Rank;
+
 
 
 	public:
 
 	Musikspieler()
 	{
-		like_Rank.reserve(10);
-		for(int i=0;i<sizeof(like_Rank)-1;i++)
-		{
-			like_Rank[i]=0;
-		}
+
+
+
 	};
 
 		void stop();
@@ -177,13 +177,15 @@ class Musikspieler
 
 		 };
 
-		void get_Like_Rank(vector<double> Rank)
+		void get_Like_Rank(vector<double>& Rank)
 		{
-			for(int i=0;i<sizeof(playlist)-1;i++)
+			for(int i=0;i<index;i++)
 			{
 				//%Fehler% "Quit (expect signal SIGINT when the program is resumed)"
 
+				//Rank.at(i)=1;
 				like_Rank[i]=Rank[i];
+				cout<< like_Rank[i]<< "\n";
 			}
 		}
 
@@ -216,7 +218,7 @@ class Benutzer
 		}
 
 		like_Rank.reserve(anzahl_der_Lieder);
-				for(int i=0;i<sizeof(like_Rank)-1;i++)
+				for(int i=0;i<index;i++)
 				{
 					like_Rank[i]=1;
 				};
@@ -257,7 +259,7 @@ public:
 					cerr<<"Fehler beim oeffnen von Rang_Ergebnisse_Benutzer";
 				}
 				like_Rank.reserve(anzahl_der_Lieder);
-								for(int i=0;i<sizeof(like_Rank)-1;i++)
+								for(int i=0;i<index;i++)
 								{
 									like_Rank[i]=0;
 								};
@@ -299,7 +301,7 @@ public:
 						cerr<<"Fehler beim oeffnen von Rang_Ergebnisse_Benutzer";
 					}
 					like_Rank.reserve(anzahl_der_Lieder);
-									for(int i=0;i<sizeof(like_Rank)-1;i++)
+									for(int i=0;i<index;i++)
 									{
 										like_Rank[i]=0;
 									};
@@ -331,7 +333,7 @@ public:
 			}
 
 			like_Rank.reserve(anzahl_der_Lieder);
-							for(int i=0;i<sizeof(like_Rank)-1;i++)
+							for(int i=0;i<index;i++)
 							{
 								like_Rank[i]=0;
 							};
@@ -340,7 +342,7 @@ public:
 
 	void rang_bestimmen()
 	{
-		for(int i=0;i<sizeof(like_Rank)-1;i++)
+		for(int i=0;i<index;i++)
 		{
 			like_Rank[i]=0.1;
 		};
@@ -354,7 +356,7 @@ public:
 	};
 
 int main(){
-	srand(time(NULL));
+srand(time(NULL));
 
 
 
